@@ -14,6 +14,6 @@ const switchNavigator = createSwitchNavigator(
     initialRouteName: 'Auth',
   }
 );
-switchNavigator.path = '';
+switchNavigator.path = 'Auth';
 
 export default createBrowserApp(switchNavigator, { history: 'hash' });

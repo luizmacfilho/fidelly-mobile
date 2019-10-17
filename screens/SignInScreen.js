@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
+import { CTextInput, CButton, CLink, CDivider } from '../components';
+import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,7 +8,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  content: {},
+  content: {
+    width: 320,
+  },
+  sendButton: {
+    marginBottom: 16,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#cacaca',
+    marginVertical: 16,
+  },
+  createAccount: {
+    alignItems: 'center',
+  },
 });
 
 export default class SignInScreen extends React.Component {
@@ -17,56 +31,35 @@ export default class SignInScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {text: ''};
+    this.state = { email: '', password: '' };
   }
 
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.content}>
-          <View>
-            <Text>Email</Text>
-            <TextInput keyboardType='email-address' />
-          </View>
 
-          <View>
-            <Text>Password</Text>
-            <TextInput />
-          </View>
-
-          <View>
-            <Button title="Send" onPress={this._signIn} />
-            <Button title="Login With Google" onPress={() => this._authSocial(this, 'google')} />
-            <Button title="Login With Facebook" onPress={() => this._authSocial(this, 'facebook')} />
-          </View>
-
-          <View>
-            <Text onPress={this._openForgotPasswordPage}>Forgot your password?</Text>
-          </View>
-
-          <View>
-            <Text onPress={this._openSingUp}>Create an account</Text>
-          </View>
+          <CTextInput label="E-mail" keyboardType="email-address"></CTextInput>
+          <CTextInput label="Senha" password={true}></CTextInput>
+          <CButton style={styles.sendButton} label="Enviar" onPress={this._signIn}></CButton>
+          <CLink style={styles.content} label="Esqueceu sua senha?" onPress={this._openForgotPasswordPage}></CLink>
+          <CDivider />
+          <CLink style={styles.createAccount} label="Criar uma conta" onPress={this._openSingUp}></CLink>
         </View>
       </View>
     );
   }
 
   _signIn = async () => {
-    // await AsyncStorage.setItem('userToken', 'abc');
     this.props.navigation.navigate('Main');
   };
 
-  _authSocial = (component, type) => {
-    console.log(type)
-  }
-
   _openForgotPasswordPage = () => {
-    this.props.navigation.navigate('Main');
+    this.props.navigation.navigate('ForgotPassword');
   }
 
   _openSingUp = () => {
-    this.props.navigation.navigate('Main');
+    this.props.navigation.navigate('SignUp');
   }
 
 }
