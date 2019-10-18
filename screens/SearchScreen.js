@@ -1,5 +1,6 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, TextInput } from 'react-native';
+import { CTextInput } from '../components';
+import { ScrollView, StyleSheet, View, TextInput, Text } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -11,7 +12,10 @@ const styles = StyleSheet.create({
 
 export default class SearchScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    headerTitle: <CTextInput />,
+    headerStyle: {
+      boxShadow: 'none'
+    },
   };
 
   render() {
