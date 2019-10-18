@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   contentContainer: {
-    marginVertical: 8,
+    paddingBottom: 8,
   },
   header: {
     marginHorizontal: 16,
@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
   },
   rewardDescription: {
     color: '#888',
-    marginBottom: 8,
   },
   rewardAmount: {
     color: '#888',
@@ -47,6 +46,30 @@ const rewards = [
   },
   {
     id: '2',
+    name: 'Prato Feito',
+    description: 'Arroz, feijão, salada, macarrão e um bife de boi, frango ou porco.',
+    amount: 6,
+  },
+  {
+    id: '3',
+    name: 'Prato Feito',
+    description: 'Arroz, feijão, salada, macarrão e um bife de boi, frango ou porco.',
+    amount: 6,
+  },
+  {
+    id: '4',
+    name: 'Prato Feito',
+    description: 'Arroz, feijão, salada, macarrão e um bife de boi, frango ou porco.',
+    amount: 6,
+  },
+  {
+    id: '232',
+    name: 'Prato Feito',
+    description: 'Arroz, feijão, salada, macarrão e um bife de boi, frango ou porco.',
+    amount: 6,
+  },
+  {
+    id: '1232',
     name: 'Prato Feito',
     description: 'Arroz, feijão, salada, macarrão e um bife de boi, frango ou porco.',
     amount: 6,
@@ -72,18 +95,17 @@ export default class CardInfoScreen extends React.Component {
     const amount = navigation.getParam('amount')
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.amount}>
-            Você possui {amount} selo{amount > 0 ? 's' : ''}.
-          </Text>
-          <Text style={styles.description}>
-            Para trocar os selos por recompensas, dirija-se até o estabelecimento e solicite o resgate. Será necessário realizar autenticação.
-          </Text>
-          <Text style={styles.reward}>Recompensas</Text>
-        </View>
         <ScrollView
-          style={styles.container}
           contentContainerStyle={styles.contentContainer}>
+          <View style={styles.header}>
+            <Text style={styles.amount}>
+              Você possui {amount} selo{amount > 1 ? 's' : ''}.
+            </Text>
+            <Text style={styles.description}>
+              Para trocar os selos por recompensas, dirija-se até o estabelecimento e solicite o resgate. Será necessário realizar autenticação.
+            </Text>
+            <Text style={styles.reward}>Recompensas</Text>
+          </View>
           <FlatList
             data={rewards}
             renderItem={

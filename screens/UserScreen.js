@@ -4,11 +4,11 @@ import {
   SafeAreaView, FlatList, Platform
 } from 'react-native';
 import { CIcon } from '../components';
-import { NavigationActions, StackActions } from 'react-navigation';
-// import Constants from 'expo-constants';
+import Constants from 'expo-constants';
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     margin: 16,
   },
