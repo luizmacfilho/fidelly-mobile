@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 20,
-    fontWeight: '500',
+    fontWeight: '400',
     marginBottom: 4,
     color: '#353535'
   },
