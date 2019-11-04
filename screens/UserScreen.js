@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { CIcon } from '../components';
 import Constants from 'expo-constants';
+import * as firebase from 'firebase/app';
 
 const styles = StyleSheet.create({
   container: {
@@ -96,7 +97,8 @@ export default class UserScreen extends React.Component {
     );
   }
 
-  _logOut() {
+  async _logOut() {
+    await firebase.auth().signOut();
     this.props.navigation.navigate('Auth');
   }
 }
