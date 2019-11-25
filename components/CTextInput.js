@@ -41,7 +41,7 @@ export default class CTextInput extends React.Component {
 
   render() {
     return (
-      <View style={styles.input}>
+      <View style={[styles.input, this.props.style]}>
         <Text style={styles.inputLabel}>{this.props.label}</Text>
         <TextInput
           onChangeText={(value) => this._onChangeText(value)}
@@ -50,6 +50,7 @@ export default class CTextInput extends React.Component {
           onFocus={() => this._onFocus()}
           style={styles.inputField}
           secureTextEntry={this.props.password}
+          placeholder={this.props.placeholder}
           keyboardType={this.props.keyboardType} />
         <Text style={styles.inputError}>{this.props.error || this.state.internalError}</Text>
       </View>

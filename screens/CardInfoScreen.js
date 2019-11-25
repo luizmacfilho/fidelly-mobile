@@ -40,40 +40,22 @@ const styles = StyleSheet.create({
 const rewards = [
   {
     id: '1',
-    name: 'Pão de Queijo',
-    description: 'Pão de queijo feito com muito pão e queijo.',
-    amount: 5,
+    name: 'Café com Leite',
+    description: 'Café com Leite médio. Café é da marca Três Corações e o leite é Itambé.',
+    amount: 4,
   },
   {
     id: '2',
-    name: 'Prato Feito',
-    description: 'Arroz, feijão, salada, macarrão e um bife de boi, frango ou porco.',
-    amount: 6,
+    name: 'Misto Quente',
+    description: 'Misto quente com queijo e presunto.',
+    amount: 10,
   },
   {
     id: '3',
-    name: 'Prato Feito',
-    description: 'Arroz, feijão, salada, macarrão e um bife de boi, frango ou porco.',
-    amount: 6,
+    name: 'Pão de Queijo',
+    description: 'Pão de Queijo simples, quentinho e delicioso!',
+    amount: 5,
   },
-  {
-    id: '4',
-    name: 'Prato Feito',
-    description: 'Arroz, feijão, salada, macarrão e um bife de boi, frango ou porco.',
-    amount: 6,
-  },
-  {
-    id: '232',
-    name: 'Prato Feito',
-    description: 'Arroz, feijão, salada, macarrão e um bife de boi, frango ou porco.',
-    amount: 6,
-  },
-  {
-    id: '1232',
-    name: 'Prato Feito',
-    description: 'Arroz, feijão, salada, macarrão e um bife de boi, frango ou porco.',
-    amount: 6,
-  }
 ];
 
 export default class CardInfoScreen extends React.Component {
@@ -113,7 +95,7 @@ export default class CardInfoScreen extends React.Component {
               <CCard>
                 <Text style={styles.rewardTitle}>{name}</Text>
                 <Text style={styles.rewardDescription}>{description}</Text>
-                <Text style={styles.rewardAmount}>{amount} selo{amount > 0 ? 's' : ''}</Text>
+                <Text style={styles.rewardAmount}>{amount} selo{amount > 1 ? 's' : ''}</Text>
               </CCard>}
             keyExtractor={item => item.id}
           />

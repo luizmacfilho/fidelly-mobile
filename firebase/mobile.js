@@ -1,16 +1,20 @@
 import * as firebase from 'firebase/app';
-import { mobileConfig } from './config';
+import { mobileConfig, adminConfig } from './config';
 import 'firebase/auth';
 import 'firebase/firestore';
 
-// Initialize Firebase
+let db = null;
+let admin = null;
 if (!firebase.apps.length) {
-  firebase.initializeApp(mobileConfig);
+  const primary = firebase.initializeApp(mobileConfig);
+  const secondary = firebase.initializeApp(adminConfig, 'admin');
+  db = primary.firestore();
+  admin = secondary.firestore();
+  primary.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 }
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-let db = firebase.firestore();
+
 let user = null;
 function getUser() { return user; }
-function setUser(user) { user = user; }
+function setUser(_user) { user = _user; }
 
-export { db, setUser, getUser };
+export { db, setUser, getUser, admin };

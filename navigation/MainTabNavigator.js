@@ -22,7 +22,7 @@ const HomeStack = createStackNavigator(
 );
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: 'Início',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -45,7 +45,7 @@ const SearchStack = createStackNavigator(
 );
 
 SearchStack.navigationOptions = {
-  tabBarLabel: 'Search',
+  tabBarLabel: 'Pesquisar',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-search' : 'md-search'} />
   ),
@@ -61,7 +61,7 @@ const UserStack = createStackNavigator(
 );
 
 UserStack.navigationOptions = {
-  tabBarLabel: 'User',
+  tabBarLabel: 'Minha conta',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} />
   ),

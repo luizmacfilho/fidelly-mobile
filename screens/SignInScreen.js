@@ -52,8 +52,8 @@ export default class SignInScreen extends React.Component {
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         <View style={styles.content}>
-          <CTextInput ref={this.emailInput}   label="E-mail" keyboardType="email-address" rules={this.rules.email} error={this.state.error} onChange={(email) => this.setState({ email })}></CTextInput>
-          <CTextInput ref={this.passwordInput}  label="Senha" password={true} rules={this.rules.password} onChange={(password) => this.setState({ password })}></CTextInput>
+          <CTextInput ref={this.emailInput} label="E-mail" keyboardType="email-address" rules={this.rules.email} error={this.state.error} onChange={(email) => this.setState({ email })}></CTextInput>
+          <CTextInput ref={this.passwordInput} label="Senha" password={true} rules={this.rules.password} onChange={(password) => this.setState({ password })}></CTextInput>
           <CButton style={styles.sendButton} label="Enviar" onPress={() => this._signIn()} loading={this.state.loading}></CButton>
           <CLink style={styles.content} label="Esqueceu sua senha?" onPress={this._openForgotPasswordPage}></CLink>
           <CDivider />

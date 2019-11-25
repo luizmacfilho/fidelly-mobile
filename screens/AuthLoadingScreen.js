@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, ActivityIndicator, StatusBar, Text } from 'react-native';
+import { View, StyleSheet, ActivityIndicator, StatusBar } from 'react-native';
 import * as firebase from 'firebase/app';
-import { setUser } from '../firebase/mobile';
+import { setUser, getUser } from '../firebase/mobile';
 
 const styles = StyleSheet.create({
   container: {
