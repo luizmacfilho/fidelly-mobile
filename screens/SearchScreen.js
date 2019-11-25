@@ -1,12 +1,12 @@
 import React from 'react';
 import { CTextInput, CCard } from '../components';
-import { ScrollView, StyleSheet, View, Text, FlatList, ActivityIndicator, StatusBar } from 'react-native';
-import Constants from 'expo-constants';
+import { ScrollView, StyleSheet, View, Text, FlatList, ActivityIndicator, StatusBar, SafeAreaView } from 'react-native';
+// import Constants from 'expo-constants';
 import { admin } from '../firebase/mobile';
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: Constants.statusBarHeight,
+    // paddingTop: Constants.statusBarHeight,
     flex: 1,
     backgroundColor: '#fff',
   },
@@ -46,7 +46,7 @@ export default class SearchScreen extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <CTextInput style={styles.searchInput} placeholder="Pesquisar" onChange={(search) => this.onChange(search)} />
         {this.state.loading
           ? <View style={styles.loading}>
@@ -61,33 +61,30 @@ export default class SearchScreen extends React.Component {
           ? <Text style={styles.message}>Nenhum estabelecimento encontrado.</Text>
           : null}
         {!this.state.loading && this.state.stores.length && this.state.search
-          ? <ScrollView style={styles.container}>
-              <FlatList
-                data={this.state.stores}
-                renderItem={
-                  ({ item: { name, description } }) =>
-                  <CCard>
-                    <Text style={styles.storeTitle}>{name}</Text>
-                    <Text style={styles.storeDescription}>{description}</Text>
-                  </CCard>}
-                keyExtractor={item => item.id}
-              />
+          ? <ScrollView>
+              <SafeAreaView>
+                <FlatList
+                  data={this.state.stores}
+                  renderItem={
+                    ({ item: { name, description } }) => (
+                      <CCard>
+                        <Text style={styles.storeTitle}>{name}</Text>
+                        <Text style={styles.storeDescription}>{description}</Text>
+                      </CCard>
+                    )}
+                  keyExtractor={item => item.id}
+                />
+              </SafeAreaView>
             </ScrollView>
           : null}
       </View>
     );
   }
 
-  collection = null;
-
-  componentWillMount() {
-    this.collection = admin.collection('store');
-  }
-
   onChange = (search) => {
     if (search) {
       this.setState({ search, loading: true });
-      this.collection.get().then((querySnapshot) => {
+      admin.collection('store').get().then((querySnapshot) => {
         const stores = [];
         querySnapshot.forEach((doc) => {
           const data = doc.data();

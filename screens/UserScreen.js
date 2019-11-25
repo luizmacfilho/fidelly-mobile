@@ -6,6 +6,7 @@ import {
 import { CIcon } from '../components';
 import Constants from 'expo-constants';
 import * as firebase from 'firebase/app';
+import { getUser } from '../firebase/mobile';
 
 const styles = StyleSheet.create({
   container: {
@@ -56,16 +57,6 @@ export default class UserScreen extends React.Component {
 
   options = [
     {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: 'Edit account',
-      iconName: 'egg',
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: 'Share',
-      iconName: 'share',
-    },
-    {
       id: '58694a0f-3da1-471f-bd96-145571e29d72',
       title: 'Logout',
       iconName: 'log-out',
@@ -75,14 +66,22 @@ export default class UserScreen extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = { name: '', email: '' };
+  }
+
+  componentDidMount() {
+    const user = getUser();
+    if (user) {
+      this.setState({ name: user.displayName, email: user.email });
+    }
   }
 
   render() {
     return (
       <View style={styles.container}>
         <View>
-          <Text style={styles.user}>Luiz Filho</Text>
-          <Text style={styles.email}>luiz.macfilho@gmail.com</Text>
+          <Text style={styles.user}>{this.state.name}</Text>
+          <Text style={styles.email}>{this.state.email}</Text>
 
           <SafeAreaView>
             <FlatList

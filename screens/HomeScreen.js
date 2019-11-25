@@ -36,15 +36,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const DATA = [
-  {
-    id: 'asdfas',
-    name: 'Padaria Pão Doce',
-    amount: 3,
-    remaining: 1,
-  }
-];
-
 const Card = (props) => {
   const remaining = (
     <Text style={styles.cardDescription}>
@@ -73,7 +64,7 @@ export default class HomeScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { loading: false, cards: []}
+    this.state = { loading: false, cards: [] }
   }
 
   render() {
@@ -112,7 +103,7 @@ export default class HomeScreen extends React.Component {
     );
   }
 
-  _goToCardInfo = (id, name, amount) => {
+  _goToCardInfo = (id, name, amount, storeId) => {
     this.props.navigation.navigate('CardInfo', { id, name, amount, storeId });
   }
 

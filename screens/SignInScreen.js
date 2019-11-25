@@ -75,6 +75,7 @@ export default class SignInScreen extends React.Component {
         this.setState({ loading: false });
         this.props.navigation.navigate('Main');
       } catch (error) {
+        console.log(error);
         this.setState({ error: 'E-mail ou senha inválidos', loading: false });
       }
     }

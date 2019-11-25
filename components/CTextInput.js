@@ -20,10 +20,10 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
   },
   inputError: {
-    height: 12,
-    fontSize: 12,
+    height: 14,
+    fontSize: 11,
     fontWeight: '500',
-    marginTop: 2,
+    marginTop: 0,
     color: Colors.danger
   },
 });
@@ -46,7 +46,6 @@ export default class CTextInput extends React.Component {
         <TextInput
           onChangeText={(value) => this._onChangeText(value)}
           onBlur={() => this._onBlur()}
-          onChange={(event) => this._onChange(event)}
           onFocus={() => this._onFocus()}
           style={styles.inputField}
           secureTextEntry={this.props.password}
@@ -62,17 +61,14 @@ export default class CTextInput extends React.Component {
   };
 
   _onFocus = () => {
-    this.setState({ internalError: '' });
-  }
-
-  _onChange = (event) => {
-    if (this.props.onChange) {
-      this.props.onChange(event.target.value);
-    }
+    this.setState({ internalError: '', error: '' });
   }
 
   _onChangeText = (value) => {
     this.setState({ value });
+    if (this.props.onChange) {
+      this.props.onChange(value);
+    }
   }
 
   isValid = () => {
