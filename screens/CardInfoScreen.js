@@ -1,6 +1,7 @@
 import React from 'react';
 import { CCard, CIcon } from '../components';
 import { View, Text, Platform, StyleSheet, ScrollView, FlatList } from 'react-native';
+import { admin } from '../firebase/mobile';
 
 const styles = StyleSheet.create({
   container: {
@@ -37,27 +38,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const rewards = [
-  {
-    id: '1',
-    name: 'Café com Leite',
-    description: 'Café com Leite médio. Café é da marca Três Corações e o leite é Itambé.',
-    amount: 4,
-  },
-  {
-    id: '2',
-    name: 'Misto Quente',
-    description: 'Misto quente com queijo e presunto.',
-    amount: 10,
-  },
-  {
-    id: '3',
-    name: 'Pão de Queijo',
-    description: 'Pão de Queijo simples, quentinho e delicioso!',
-    amount: 5,
-  },
-];
-
 export default class CardInfoScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -71,6 +51,25 @@ export default class CardInfoScreen extends React.Component {
       ),
     };
   };
+
+  constructor(props) {
+    super(props);
+    this.state = { loading: false, awards: [] };
+  }
+
+  componentDidMount() {
+    this.setState({ loading: true });
+    const storeId = this.props.navigation.getParam('storeId');
+    const collection = admin.collection('store').doc(storeId).collection('awards');
+    collection.onSnapshot((snap) => {
+      const awards = [];
+      snap.forEach((doc) => {
+        awards.push({ id: doc.id, ...doc.data() });
+      });
+      this.setState({ loading: false, awards });
+    });
+    collection.get();
+  }
 
   render() {
     const { navigation } = this.props;
@@ -89,9 +88,9 @@ export default class CardInfoScreen extends React.Component {
             <Text style={styles.reward}>Recompensas</Text>
           </View>
           <FlatList
-            data={rewards}
+            data={this.state.awards}
             renderItem={
-              ({ item: { id, name, amount, description } }) =>
+              ({ item: { name, amount, description } }) =>
               <CCard>
                 <Text style={styles.rewardTitle}>{name}</Text>
                 <Text style={styles.rewardDescription}>{description}</Text>
