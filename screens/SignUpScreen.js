@@ -2,6 +2,7 @@ import React from 'react';
 import { CTextInput, CButton, CDivider, CLink } from '../components';
 import { StyleSheet, View } from 'react-native';
 import * as firebase from 'firebase/app';
+import { db, getUser } from '../firebase/mobile';
 
 const styles = StyleSheet.create({
   container: {
@@ -75,6 +76,11 @@ export default class SignUpScreen extends React.Component {
         await firebase.auth().createUserWithEmailAndPassword(email, password);
         const user = firebase.auth().currentUser;
         await user.updateProfile({ displayName: `${firstName} ${lastName}` });
+        await db.collection('users').doc(email).set({
+          email,
+          id: user.uid,
+          name: `${firstName} ${lastName}`,
+        });
         this.setState({ loading: false });
         this.props.navigation.navigate('Main');
       } catch (error) {
